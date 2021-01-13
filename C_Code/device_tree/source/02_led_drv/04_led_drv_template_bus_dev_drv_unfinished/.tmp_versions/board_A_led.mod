@@ -1,0 +1,3 @@
+/home/book/100ask_imx6ull-sdk/01_all_series_quickstart/05_嵌入式Linux驱动开发基础知识/source/02_led_drv/04_led_drv_template_bus_dev_drv_unfinished/board_A_led.ko
+/home/book/100ask_imx6ull-sdk/01_all_series_quickstart/05_嵌入式Linux驱动开发基础知识/source/02_led_drv/04_led_drv_template_bus_dev_drv_unfinished/board_A_led.o
+
