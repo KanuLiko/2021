@@ -1,7 +1,7 @@
 <font face ="Consolas">
 <center>LATEX AND VSCODE</center>
 </font>
-#<font face ="方正苏新诗柳楷简体">安装texlive</font>
+# 安装texlive
 $\Delta$ <font face ="方正苏新诗柳楷简体">可以在下列的网址中下载texlive</font>
 
 1. [华为云下载](https://link.zhihu.com/?target=https%3A//mirrors.huaweicloud.com/CTAN/systems/texlive/Images/)
