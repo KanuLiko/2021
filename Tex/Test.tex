@@ -1,0 +1,1093 @@
+\documentclass{beamer}
+
+\usepackage[UTF8, scheme = plain]{ctex}
+\usetheme{Warsaw}
+%\usecolortheme{beaver}
+
+\usepackage{graphicx}
+
+\usepackage{listings}
+\lstset{language = C++, numberstyle=\tiny,keywordstyle=\color{blue!70},commentstyle=\color{red!50!green!50!blue!50},rulesepcolor=\color{red!20!green!20!blue!20},basicstyle=\ttfamily\small}
+
+
+\title{动态规划}
+\author{陶鸿杰}
+\institute{QQ:1170755856}
+\date{2019/05/05}
+
+%-------------------------------------------------------------------------------------------------
+\begin{document}
+
+%---------------------------section A-----------------------------------------
+\section{简单的问题}
+\subsection{介绍}
+\frame{\titlepage}
+
+%---------------------------------------------
+\subsection{数字三角形}
+\begin{frame}
+\frametitle{\href{http://poj.org/problem?id=1163}{数字三角形(POJ1163)}}
+
+%------------左右分栏------
+\begin{minipage}[b]{0.30\linewidth}
+	\includegraphics[scale=0.5]{pic/NumTriangle.jpg}
+\end{minipage}
+\hfill
+\begin{minipage}[b]{0.55\linewidth}
+
+	 在左侧的数字三角形中寻找一条从顶部到底边的路径，使得路径上所经过的数字之和最大。\\ 
+	 
+	    \begin{itemize}
+	 	\item 路径上的每一步都只能往左下或 右下走。
+	 	\item 只需要求出这个最大和即可，不必给出具体路径。
+	 	\item 三角形的行数大于1,小于等于100，数字为 0 - 99。
+	 \end{itemize}
+\end{minipage}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{问题分析:}
+
+%------------左右分栏------
+\begin{minipage}[b]{0.30\linewidth}
+	\includegraphics[scale=0.5]{pic/NumTriangle.jpg}
+\end{minipage}
+\hfill
+\begin{minipage}[b]{0.55\linewidth}
+	\begin{itemize}
+		\item 三角形的行数大于1,小于等于100，数字为 0 - 99。
+		\item 暴力的时间复杂度是 $O(2^n)$,而 $2^{100}$ 肯定会超时
+		\item 在不考虑记忆话搜索的情况下，我们需要怎么解决这个问题呢？
+		
+	\end{itemize}
+	
+\end{minipage}
+\end{frame}
+
+
+
+\begin{frame}[fragile]
+\frametitle{问题分析:}
+
+%------------左右分栏------
+\begin{minipage}[b]{0.30\linewidth}
+	\includegraphics[scale=0.5]{pic/NumTriangle.jpg}
+\end{minipage}
+\hfill
+\begin{minipage}[b]{0.55\linewidth}
+	\iffalse
+	三角形的行数最大是100，暴力的时间复杂度是 $O(2^n)$,而 $2^{100}$ 肯定会超时\\
+	在不考虑记忆话搜索的情况下，我们需要怎么解决这个问题呢？\\
+	我们以a[i][j]表示这个数字三角形第i行j列上的数字
+	\fi
+	\begin{itemize}
+		\item 用a[i][j]存储这个数字三角形第i行的第j个数字
+		\item 当前的位置dp[i][j]看成一个状态
+		\item 则dp[i][j]的状态只能由它的上一层头顶上的那两个状态转移到的
+	\end{itemize}
+	
+\end{minipage}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{问题分析:}
+
+%------------左右分栏------
+\begin{minipage}[b]{0.30\linewidth}
+	\includegraphics[scale=0.5]{pic/NumTriangle.jpg}
+\end{minipage}
+\hfill
+\begin{minipage}[b]{0.55\linewidth}
+\begin{itemize}
+	\item 我们已经知道对于任意一个位置，它的状态dp[i][j]是由它的上面两个状态转移过来的\\
+	\item 我们反过来想，如果我们让路径从下往上走，那么：对于任意一个位置，它的状态dp[i][j]是由它的下面两个状态转移过来的
+\end{itemize}
+
+\end{minipage} 
+\begin{block}{状态转移方程：}
+  $dp[i][j] = a[i][j] + max(dp[i+1][j], dp[i+1][j+1])$
+\end{block}
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{我们可以写出代码了}
+\begin{block}{核心代码  （复杂度为$O(n^2)$）}
+	\begin{lstlisting}
+for(int i=n-1;i>0;i--)
+    for(int j=1;j<=i;j++)
+	a[i][j] += max(a[i+1][j],a[i+1][j+1]);
+printf("%d\n",a[1][1]);
+	\end{lstlisting}
+\end{block}
+动态规划
+\end{frame}
+%--------------------------------动态规划解题的一般思路------------------------
+\begin{frame}[fragile]
+\frametitle{动态规划解题的一般思路}
+
+\begin{minipage}[b]{0.30\linewidth}
+	\begin{figure}
+		\centering
+		\includegraphics[scale=0.40]{pic/NumTriangle.jpg}
+	\end{figure}
+	
+\end{minipage}
+\hfill
+\begin{minipage}[b]{0.65\linewidth}
+	
+	\begin{block}{1.将原问题分解为子问题}
+		\begin{itemize}
+			\item 把原问题分解为若干个子问题，子问题和原问题形式相同或类似，只不过规模变小了。子问题都解决，原问题即解决。
+			\item 子问题的解一旦求出就会被保存，所以每个子问题只需求解一次。
+		\end{itemize}
+	\end{block}
+\end{minipage}
+
+
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{动态规划解题的一般思路}
+
+\begin{minipage}[b]{0.30\linewidth}
+\begin{figure}
+	\centering
+	\includegraphics[scale=0.40]{pic/NumTriangle.jpg}
+\end{figure}
+
+\end{minipage}
+\hfill
+\begin{minipage}[b]{0.65\linewidth}
+
+\begin{block}{2.确定状态}
+	\begin{itemize}
+		\item 动态规划解题时，我们往往将和子问题相关的各个变量的一组取值，称之为一个“状态”。
+		\item 一个“状态”对应于一个或多个子问题，某个“状态”下的“值”，就是这个“状态”所对应的子问题的解。
+	\end{itemize}
+\end{block}
+\end{minipage}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{动态规划解题的一般思路}
+
+\begin{minipage}[b]{0.30\linewidth}
+\begin{figure}
+\centering
+\includegraphics[scale=0.40]{pic/NumTriangle.jpg}
+\end{figure}
+
+\end{minipage}
+\hfill
+\begin{minipage}[b]{0.65\linewidth}
+
+\begin{block}{3.确定一些初始状态(边界状态)的值}
+\begin{itemize}
+	\item 就以“数字三角形”为例，初始状态就是底边数字，值就是底边数字值。
+\end{itemize}
+\end{block}
+\end{minipage}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{动态规划解题的一般思路}
+
+\begin{minipage}[b]{0.30\linewidth}
+	\begin{figure}
+		\centering
+		\includegraphics[scale=0.40]{pic/NumTriangle.jpg}
+	\end{figure}
+	
+\end{minipage}
+\hfill
+\begin{minipage}[b]{0.65\linewidth}
+	
+	\begin{block}{4.确定状态转移方程}
+		\begin{itemize}
+			\item 定义出什么是“状态”，以及在该“状态”下的“值”后，就要找出不同的状态之间如何迁移——即如何从一个或多个“值”已知的“状态”，求出另一个“状态”的“值”（“人人为我’递推型）。状态的迁移可以用递推公式表示，此递推公式也可被称作“状态转移方程”。
+		\end{itemize}
+	\end{block}
+\end{minipage}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{能用动规解决的问题的特点}
+\begin{block}{问题具有最优子结构的性质}
+	\begin{itemize}
+		\item 如果问题的最优解所包含的子问题的解也是最优的，我们就称该问题具有最优子结构性质
+	\end{itemize}
+\end{block}
+\begin{block}{无后效性}
+	\begin{itemize}
+		\item 当前的若干个状态值一旦确定，则此后过程的演变就只和这若干个状态的值有关，和之前是采取哪种手段或经过哪条路径演变到当前的这若干个状态，没有关系。
+	\end{itemize}
+\end{block}
+\end{frame}
+
+%---------------------------------------------
+\subsection{矩阵取数}
+\begin{frame}
+%\frametitle{\href{https://www.51nod.com/Challenge/Problem.html\!\problemId=1083}{矩阵取数问题(51Nod 1083)}}
+\frametitle{矩阵取数(51Nod1083)}
+
+%------------左右分栏------
+\begin{minipage}[b]{0.30\linewidth}
+	\includegraphics[scale=0.7]{pic/num2.jpg}
+\end{minipage}
+\hfill
+\begin{minipage}[b]{0.55\linewidth}
+	
+给定一个m行n列的矩阵，矩阵每个元素是一个正整数，你现在在左上角（第一行第一列），你需要走到右下角（第m行，第n列），每次只能朝右或者下走到相邻的位置，不能走出矩阵。走过的数的总和作为你的得分，求最大的得分。
+
+\end{minipage}
+\end{frame}
+
+\begin{frame}[fragile]
+%\frametitle{\href{https://www.51nod.com/Challenge/Problem.html\!\problemId=1083}{矩阵取数问题(51Nod 1083)}}
+\frametitle{问题分析}
+
+%------------左右分栏------
+\begin{minipage}[b]{0.30\linewidth}
+	\includegraphics[scale=0.7]{pic/num23.jpg}
+\end{minipage}
+\hfill
+\begin{minipage}[b]{0.55\linewidth}
+贪心可以么？	\\
+我们先把大的数字走完！~ \\
+但是....\\
+无论我们以什么方式走到3，总和都是$1 + 1 + 3 + 1 + 1 + 1 + 1 = 9$ \\
+	
+\end{minipage}
+
+
+\end{frame}
+
+\begin{frame}[fragile]
+%\frametitle{\href{https://www.51nod.com/Challenge/Problem.html\!\problemId=1083}{矩阵取数问题(51Nod 1083)}}
+\frametitle{问题分析}
+
+%------------左右分栏------
+\begin{minipage}[b]{0.30\linewidth}
+	\includegraphics[scale=0.7]{pic/num24.jpg}
+\end{minipage}
+\hfill
+\begin{minipage}[b]{0.55\linewidth}
+我们为了1个3，放弃了那么多个2， 不值啊\\
+如果我们放弃3而走那些2， 得到的和是$1 + 1 + 2 + 2 + 2 + 1 + 1 = 10$ \\	
+	
+\end{minipage}
+
+看来贪心是错的！ 因为我们走到最大值时有很多值不能走到了，一个最大值会把我们带沟里去
+\end{frame}
+
+
+\begin{frame}[fragile]
+%\frametitle{\href{https://www.51nod.com/Challenge/Problem.html\!\problemId=1083}{矩阵取数问题(51Nod 1083)}}
+\frametitle{问题分析}
+
+%------------左右分栏------
+\begin{minipage}[b]{0.30\linewidth}
+	\includegraphics[scale=0.8]{pic/num25.jpg}
+\end{minipage}
+\hfill
+\begin{minipage}[b]{0.55\linewidth}
+	
+	
+\end{minipage}
+
+你觉得枚举可行么？\\
+你需要往下走(m – 1)次，往右走(n – 1)次，才能走到右下角，一共走m + n – 2步！可行路径的总条数有$C_{m + n – 2}^{m - 1}$。
+\end{frame}
+
+\begin{frame}[fragile]
+%\frametitle{\href{https://www.51nod.com/Challenge/Problem.html\!\problemId=1083}{矩阵取数问题(51Nod 1083)}}
+\frametitle{问题分析}
+
+%------------左右分栏------
+\begin{minipage}[b]{0.30\linewidth}
+	\includegraphics[scale=0.8]{pic/num25.jpg}
+\end{minipage}
+\hfill
+\begin{minipage}[b]{0.55\linewidth}
+	
+	
+\end{minipage}
+
+当矩阵的行数和列数都等于100的时候，来让我们计算一下:\\
+$C_{1198}^{99}=22750883079422934966181954039568885395604168260154104734000$
+\end{frame}
+
+\begin{frame}[fragile]
+%\frametitle{\href{https://www.51nod.com/Challenge/Problem.html\!\problemId=1083}{矩阵取数问题(51Nod 1083)}}
+\frametitle{dp一下}
+
+%------------左右分栏------
+\begin{minipage}[b]{0.30\linewidth}
+	\includegraphics[scale=0.7]{pic/num2.jpg}
+\end{minipage}
+\hfill
+\begin{minipage}[b]{0.55\linewidth}
+	\begin{itemize}
+		\item 用a[i][j]存储这个二维矩阵的第i行第j个的数字
+		\item 当前的位置dp[i][j]看成一个状态
+		\item 则dp[i][j]的状态只能由它的头顶上的状态和它左侧的那个状态转移到的
+	\end{itemize}
+	
+\end{minipage}
+\end{frame}
+
+\begin{frame}[fragile]
+%\frametitle{\href{https://www.51nod.com/Challenge/Problem.html\!\problemId=1083}{矩阵取数问题(51Nod 1083)}}
+\frametitle{dp一下 }
+\begin{minipage}[b]{0.30\linewidth}
+	\includegraphics[scale=0.7]{pic/num2.jpg}
+\end{minipage}
+\hfill
+\begin{minipage}[b]{0.55\linewidth}
+	那么我们就可以写出来状态转移方程了 \\
+	状态转移方程如下所示：\\
+\end{minipage}
+\begin{block}{状态转移方程}
+\includegraphics[scale=0.7]{pic/dp1.jpg}
+\end{block}
+\end{frame}
+
+
+
+\begin{frame}[fragile]
+\frametitle{核心代码}
+\begin{block}{代码实现  （复杂度为$O(n^2)$）}
+\begin{lstlisting}
+for(int i=1;i<=n;i++)
+  for(int j=1;j<=n;j++)
+    if(i==1)    
+	a[i][j] += a[i][j-1];
+    else if(j==1)
+	a[i][j] += a[i-1][j];
+    else
+	a[i][j] += max(a[i-1][j],a[i][j-1]);
+printf("%d\n",a[n][n]);
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+
+\begin{frame}[fragile]
+%\frametitle{\href{https://www.51nod.com/Challenge/Problem.html\!\problemId=1083}{矩阵取数问题(51Nod 1083)}}
+\frametitle{状态分析}
+\begin{minipage}[b]{0.30\linewidth}
+	\includegraphics[scale=0.7]{pic/num26.jpg}
+\end{minipage}
+\hfill
+\begin{minipage}[b]{0.55\linewidth}
+	\begin{block}{代码分析(i=1时)}
+	对于第j列，它的状态只能由它左侧的状态来传递的\\
+	即 $dp[i][j] = a[i][j] + dp[i][j-1]$\\
+	箭头的方向即为状态转移的方向
+	\end{block}
+\end{minipage}
+\end{frame}
+\begin{frame}[fragile]
+%\frametitle{\href{https://www.51nod.com/Challenge/Problem.html\!\problemId=1083}{矩阵取数问题(51Nod 1083)}}
+\frametitle{状态分析}
+\begin{minipage}[b]{0.30\linewidth}
+	\includegraphics[scale=0.7]{pic/num27.jpg}
+\end{minipage}
+\hfill
+\begin{minipage}[b]{0.55\linewidth}
+	\begin{block}{代码分析(i=2时)}
+	对于第j列，它的状态由它左侧的状态和它上面的状态来传递的\\
+	即 $dp[i][j] = a[i][j] + max(dp[i][j-1], dp[i-1][j])$\\
+	箭头的方向即为状态转移的方向
+	\end{block}	
+\end{minipage}
+\end{frame}
+\begin{frame}[fragile]
+%\frametitle{\href{https://www.51nod.com/Challenge/Problem.html\!\problemId=1083}{矩阵取数问题(51Nod 1083)}}
+\frametitle{状态分析}
+\begin{minipage}[b]{0.30\linewidth}
+	\includegraphics[scale=0.7]{pic/num28.jpg}
+\end{minipage}
+\hfill
+\begin{minipage}[b]{0.55\linewidth}
+	\begin{block}{代码分析(i=3时)}
+	对于第j列，它的状态由它左侧的状态和它上面的状态来传递的\\
+	即 $dp[i][j] = a[i][j] + max(dp[i][j-1], dp[i-1][j])$\\
+	箭头的方向即为状态转移的方向
+	\end{block}	
+\end{minipage}
+\end{frame}
+
+
+
+%---------------------------section B-----------------------------------------
+\section{经典的问题}
+
+%---------------------------------------------
+\subsection{最大子段和}
+\begin{frame}
+%\frametitle{\href{https://www.51nod.com/Challenge/Problem.html#!#problemId=1049}{最大子段和(51Nod1049)}}
+\frametitle{最大子段和(51Nod1049)}
+%------------左右分栏------
+\begin{block}{题目描述}
+给出一个整数数组a(正负数都有)，如何找出一个连续子数组（可以一个都不取，那么结果为0），使得其中的和最大？\\
+例如：-2,11,-4,13,-5,-2，和最大的子段为：11,-4,13。和为20。
+\end{block}
+\begin{block}{输入}
+	第1行：整数序列的长度N（2$ <= N <= 50000$)\\
+	第2 - N + 1行：N个整数（-$10^9 <= A[i] <= 10^9$）
+\end{block}	
+\begin{block}{输出}
+	输出最大子段和。
+\end{block}
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{问题分析}
+\begin{block}{例如}
+	-2,11,-4,13,-5,-2\\
+	和最大的子段为：11,-4,13。和为20。 
+\end{block}
+	枚举？ \\
+	让数组$a_i$保存第i个数字，那么，我们枚举的话，会得到这样的结果:\\
+	\begin{itemize} \scriptsize
+		\item \{$a_1$\}, \{$a_1+a_2$\}, \{$a_1+a_2+a_3$\}, \{$a_1+a_2+a_3+a_4$\}, \{$a_1+a_2+a_3+a_4+a_5$\} 
+		\item \{$ a_2$\}, \{$ a_2+a_3$\}, \{$a_2+a_3+a_4$\}, \{$a_2+a_3+a_4+a_5$\} 
+		\item \{$ a_3$\}, \{$ a_3+a_4$\}, \{$ a_3+a_4+a_5$\} 
+		\item \{$a_4$\}, \{$a_4+a_5$\}
+		\item \{$a_5$\} 
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{问题分析}
+\begin{block}{例如}
+	-2,11,-4,13,-5,-2\\
+	和最大的子段为：11,-4,13。和为20。 
+\end{block}
+\begin{itemize} \scriptsize
+	\item \{$a_1$\}, \{$a_1+a_2$\}, \{$a_1+a_2+a_3$\}, \{$a_1+a_2+a_3+a_4$\}, \{$a_1+a_2+a_3+a_4+a_5$\} 
+	\item \{$ a_2$\}, \{$ a_2+a_3$\}, \{$a_2+a_3+a_4$\}, \{$a_2+a_3+a_4+a_5$\} 
+	\item \{$ a_3$\}, \{$ a_3+a_4$\}, \{$ a_3+a_4+a_5$\} 
+	\item \{$a_4$\}, \{$a_4+a_5$\}
+	\item \{$a_5$\} 
+\end{itemize}
+我们需要枚举起点，终点，以及计算它们的和，时间复杂度是$O(n^3)$\\
+即使我们利用前缀和的方法，也只能把时间复杂度降低到$O(n^2)$，还是比较慢
+\end{frame}
+	
+\begin{frame}[fragile]
+\frametitle{问题分析}
+\begin{block}{例如}
+	-2,11,-4,13,-5,-2\\
+	和最大的子段为：11,-4,13。和为20。 
+\end{block}
+\begin{itemize} \scriptsize
+	\item \{$a_1$\}, \{$a_1+a_2$\}, \{$a_1+a_2+a_3$\}, \{$a_1+a_2+a_3+a_4$\}, \{$a_1+a_2+a_3+a_4+a_5$\} 
+	\item \{$ a_2$\}, \{$ a_2+a_3$\}, \{$a_2+a_3+a_4$\}, \{$a_2+a_3+a_4+a_5$\} 
+	\item \{$ a_3$\}, \{$ a_3+a_4$\}, \{$ a_3+a_4+a_5$\} 
+	\item \{$a_4$\}, \{$a_4+a_5$\}
+	\item \{$a_5$\} 
+\end{itemize}
+能不能在$O(n)$的时间内把这个问题解决？\\
+
+\end{frame}
+
+
+\begin{frame}[fragile]
+\frametitle{问题分析}
+\begin{block}{例如}
+	-2,11,-4,13,-5,-2\\
+	和最大的子段为：11,-4,13。和为20。 
+\end{block}
+\begin{itemize} \scriptsize
+	\item \{$a_1$\}, \{$a_1+a_2$\}, \{$a_1+a_2+a_3$\}, \{$a_1+a_2+a_3+a_4$\}, \{$a_1+a_2+a_3+a_4+a_5$\} 
+	\item \{$ a_2$\}, \{$ a_2+a_3$\}, \{$a_2+a_3+a_4$\}, \{$a_2+a_3+a_4+a_5$\} 
+	\item \{$ a_3$\}, \{$ a_3+a_4$\}, \{$ a_3+a_4+a_5$\} 
+	\item \{$a_4$\}, \{$a_4+a_5$\}
+	\item \{$a_5$\} 
+\end{itemize}
+用动态规划的思路想一下:\\
+如果我们用dp[i]记录第i个位置上的状态\\
+让dp[i]表示以a[i]为结尾的最大子段和
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{问题分析}
+\begin{block}{例如}
+	-2,11,-4,13,-5,-2\\
+	和最大的子段为：11,-4,13。和为20。 
+\end{block}
+\begin{itemize} \scriptsize
+	\item \{$a_1$\}, \{$a_1+a_2$\}, \{$a_1+a_2+a_3$\}, \{$a_1+a_2+a_3+a_4$\}, \{$a_1+a_2+a_3+a_4+a_5$\} 
+	\item \{$ a_2$\}, \{$ a_2+a_3$\}, \{$a_2+a_3+a_4$\}, \{$a_2+a_3+a_4+a_5$\} 
+	\item \{$ a_3$\}, \{$ a_3+a_4$\}, \{$ a_3+a_4+a_5$\} 
+	\item \{$a_4$\}, \{$a_4+a_5$\}
+	\item \{$a_5$\} 
+\end{itemize}
+
+那么对于第i个数字a[i], 我们可以取, 也可以不取\\
+如果加上a[i]后, $dp[i]<0$, 那么就不能取a[i],这个时候dp[i]=0 \\
+否则dp[i]就等于dp[i-1]+a[i],这个就是以a[i]为结尾的最大子段和
+\end{frame}
+
+
+\begin{frame}[fragile]
+\frametitle{问题分析}
+\begin{block}{例如}
+	-2,11,-4,13,-5,-2\\
+	和最大的子段为：11,-4,13。和为20。
+\end{block}
+\begin{itemize}
+	\item dp数组初始化为0
+	\item dp[i] = max(dp[i-1]+a[i], dp[i])
+	\item 遍历一遍dp数组，取最大的
+\end{itemize}
+	
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{DP代码}
+
+\begin{block}{代码实现  （复杂度为$O(n)$）}
+	\begin{lstlisting}
+memset(dp,0,sizeof(dp));
+ll maxx = 0;
+for(int i=1;i<=n;i++)
+{
+    cin>>a[i];
+    dp[i] = max(dp[i-1]+a[i],a[i]);
+    maxx = max(maxx,dp[i]);
+}
+cout<<maxx<<endl;
+	\end{lstlisting}
+\end{block}
+\end{frame}
+
+
+%---------------------------------------------
+
+\subsection{最长公共子序列}
+
+\begin{frame}
+\frametitle{\href{http://poj.org/problem?id=1458}{最长公共子序列(POJ 1458)}}
+%\frametitle{最长公共子序列(POJ 1458)}
+\begin{block}{最长公共子序列定义}
+	最长公共子串（Longest Common Substring）和最长公共子序列（Longest Common Subsequence, LCS）的区别：\\
+	子串（Substring）是串的一个连续的部分，子序列（Subsequence）则是从不改变序列的顺序，而从序列中去掉任意的元素而获得的新序列；\\
+	更简略地说，前者（子串）的字符的位置必须连续，	后者（子序列LCS）则不必。\\
+	比如字符串acdfg同akdfc的最长公共子串为df，而他们的最长公共子序列是adf。LCS可以使用动态规划法解决。
+\end{block}	
+
+\end{frame}
+
+\begin{frame}[fragile]
+%\frametitle{\href{https://www.51nod.com/Challenge/Problem.html\!\problemId=1083}{矩阵取数问题(51Nod1083)}}
+%\frametitle{最长公共子序列(51Nod1006)}
+\frametitle{\href{http://poj.org/problem?id=1458}{最长公共子序列(POJ 1458)}}
+\begin{block}{题目描述}
+	给出两个字符串A B，求A与B的最长公共子序列的长度。\\
+	比如两个串为：\\
+	\begin{itemize}
+		\item abcfbc         
+		\item abfcab
+	\end{itemize}
+	ab是两个串的子序列，abc也是，abfc也是，其中abfc是这两个字符串最长的子序列。\\
+	所以结果是4
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+%\frametitle{\href{https://www.51nod.com/Challenge/Problem.html\!\problemId=1083}{矩阵取数问题(51Nod1083)}}
+%\frametitle{最长公共子序列(51Nod1006)}
+\frametitle{\href{http://poj.org/problem?id=1458}{最长公共子序列(POJ 1458)}}
+\begin{block}{DP一下}
+	不妨定义$dp[i][j]$表示$A_1\cdots A_i$和$B_1\cdots B_j$对应的LCS的长度\\
+	那么, $A_1\cdots A_{i+1}$和$B_1\cdots B_{j+1}$对应的公共子序列可能是\\
+	\begin{itemize}\footnotesize	
+		\item 当$A_{i+1}=B_{j+1}$时, 在$A_1\cdots A_{i}$和$B_1\cdots B_{j}$的公共子序列末尾追加上$A_{i+1}$
+		\item  $A_1\cdots A_{i}$和$B_1\cdots B_{j+1}$的公共子序列
+		\item  $A_1\cdots A_{i+1}$和$B_1\cdots B_{j}$的公共子序列
+	\end{itemize}
+	三者中的某一个，所以就有了一下递推关系成立
+	$$dp[i+1][j+1] =
+	\begin{cases}
+	dp[i][j]+1 & A_{i+1} =B_{j+1} \\
+	max(dp[i+1][j],dp[i][j+1]) & else
+	\end{cases}$$
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{DP代码}
+\begin{block}{代码实现  （复杂度为$O(n*m)$）}
+	\begin{lstlisting}
+for(int i=0;i<n;++i)
+  for(int j=0;j<m;++j)
+    if(a[i]==b[j])  
+      dp[i+1][j+1] = dp[i][j] + 1;
+    else            
+      dp[i+1][j+1] = max(dp[i+1][j], dp[i][j+1]);
+cout<<dp[n][m]<<endl;
+	\end{lstlisting}
+\end{block}
+\end{frame}
+
+
+
+%-----------------------------下面是注释掉的代码-------------------------------------------
+\iffalse
+\subsection{最长公共子序列}
+\begin{frame}
+\frametitle{\href{http://poj.org/problem?id=1458}{最长公共子序列(POJ 1458)}}
+%\frametitle{最长公共子序列(POJ 1458)}
+
+%------------左右分栏------
+\begin{minipage}[b]{0.30\linewidth}
+\includegraphics[scale=0.7]{pic/num2.jpg}
+\end{minipage}
+\hfill
+\begin{minipage}[b]{0.55\linewidth}
+
+给定一个m行n列的矩阵，矩阵每个元素是一个正整数，你现在在左上角（第一行第一列），你需要走到右下角（第m行，第n列），每次只能朝右或者下走到相邻的位置，不能走出矩阵。走过的数的总和作为你的得分，求最大的得分。
+
+\end{minipage}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{DP代码}
+\begin{block}{代码实现  （复杂度为$O(n^2)$）}
+\begin{lstlisting}
+for(int i=1;i<=n;i++)
+for(int j=1;j<=n;j++)
+if(i==1)    
+a[i][j] += a[i][j-1];
+else if(j==1)
+a[i][j] += a[i-1][j];
+else
+a[i][j] += max(a[i-1][j],a[i][j-1]);
+printf("%d\n",a[n][n]);
+\end{lstlisting}
+\end{block}
+\end{frame}
+\fi
+%-----------------------------注释部分结束-------------------------------------------
+
+
+%---------------------------------------------
+\subsection{最长上升子序列}
+\begin{frame}
+%\frametitle{\href{https://www.51nod.com/Challenge/Problem.html\!\problemId=1083}{矩阵取数问题(51Nod1083)}}
+%\frametitle{\href{http://poj.org/problem?id=1631}{最长上升子序列(POJ1631)}}
+\frametitle{最长上升子序列}
+\begin{block}{最长上升子序列问题}
+	有一个长为$\ n\ $的数列$\;a_0, a_1, \dots, a_{n-1}$。请求出这个序列中最长的上升子序列的长度。上升子序列指的是对于任意的$i<j\ $都满足$\ a_i<a_j\ $的子序列。\\
+	
+	\begin{itemize}
+		\item $1\le n \le 1000$
+		\item $0\le a_i \le 1000000$
+	\end{itemize}
+\end{block}
+\begin{block}{输入}
+	5\\
+	4 2 3 1 5
+\end{block}
+\begin{block}{输出}
+	3 $\quad (a_1, a_2, a_4\ $构成的子序列$2, 3, 5$最长)
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+%\frametitle{\href{https://www.51nod.com/Challenge/Problem.html\!\problemId=1083}{矩阵取数问题(51Nod1083)}}
+%\frametitle{\href{http://poj.org/problem?id=1631}{最长上升子序列(POJ1631)}}
+\frametitle{最长上升子序列}
+这一问题能够通过使用DP在$O(n^2)$的时间内解决，我们来建立一下递推关系。
+\begin{itemize}
+	\item 定义dp[i]：以$a_i$为末尾的最长上升子序列的长度
+\end{itemize}
+以$a_i$为结尾的上升子序列是
+\begin{itemize}
+	\item 只包含$a_i$的子序列
+	\item 在满足$j<i$并且$a_j<a_i$的以$a_j$为结尾的上升子序列末尾，追加上$a_i$后得到的子序列
+\end{itemize}
+这二者之一。这样我们就到到了以下的递推关系：\\
+$$dp[i] = max\{1, dp[j]+1|j<i \text{且} a_j<a_i\}$$
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{代码实现}
+\begin{block}{DP代码}
+	\begin{lstlisting}
+int res = 0;
+for(int i=0;i<n;++i)
+{
+  dp[i] = 1;
+  for(int j=0;j<i;++j)
+    if(a[j]<a[i])     
+      dp[i] = max(dp[i], dp[j]+1);
+  res = max(res, dp[i]);
+}
+cout<<res<<endl;
+	\end{lstlisting}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+%\frametitle{\href{https://www.51nod.com/Challenge/Problem.html\!\problemId=1083}{矩阵取数问题(51Nod1083)}}
+%\frametitle{\href{http://poj.org/problem?id=1631}{最长上升子序列(POJ1631)}}
+\frametitle{结束}
+	学习算法需要多练多思考，这里给大家推荐几个学习动态规划地方(点击即可转到)：\\
+	\begin{itemize}
+		\item \href{https://www.icourse163.org/learn/PKU-1001894005?tid=1205957211#/learn/content}{PKU郭炜老师讲的算法课程}
+		\item \href{https://www.51nod.com/Tutorial/TutorialList.html}{51Nod里面的教程}
+		\item \href{http://www.cppblog.com/menjitianya/archive/2015/10/23/212084.html}{夜深人静写算法（二） - 动态规划}
+	\end{itemize}
+\end{frame}
+
+
+%---------多行注释-----|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+\iffalse
+\begin{frame}[fragile]
+\frametitle{Code:}
+a[i][j]代表第i行j列的数字
+\begin{block}{代码实现  （复杂度为$O(n^2)$）}
+\begin{lstlisting}
+for(int i=1;i<=n;i++)
+for(int j=1;j<=n;j++)
+if(i==1)    
+a[i][j] += a[i][j-1];
+else if(j==1)
+a[i][j] += a[i-1][j];
+else
+a[i][j] += max(a[i-1][j],a[i][j-1]);
+printf("%d\n",a[n][n]);
+\end{lstlisting}
+\end{block}
+\end{frame}
+\textbf{}
+
+
+\begin{frame}[fragile]
+\frametitle{算法描述}
+数学表述：
+\begin{itemize}
+	\item ${\displaystyle \gcd(a,0)=a}$
+	\item ${\displaystyle \gcd(a,b)=\gcd(b,a\,\mathrm {mod} \,b)} $
+\end{itemize}
+\begin{block}{代码实现  （复杂度为O(logn)）}
+	\begin{lstlisting}
+	int gcd(a, b) {
+	return b ? gcd(b, a % b) : a;
+	}
+	\end{lstlisting}
+\end{block}
+\end{frame}
+
+
+\begin{frame}[fragile]
+\frametitle{算法描述}
+数学表述：
+\begin{itemize}
+	\item ${\displaystyle \gcd(a,0)=a}$
+	\item ${\displaystyle \gcd(a,b)=\gcd(b,a\,\mathrm {mod} \,b)} $
+\end{itemize}
+\begin{block}{代码实现  （复杂度为O(logn)）}
+	\begin{lstlisting}
+	int gcd(a, b) {
+	return b ? gcd(b, a % b) : a;
+	}
+	\end{lstlisting}
+\end{block}
+\end{frame}
+
+
+%--------------------------------------背包 问题---------------------------------------------------
+
+\section{背包$\quad$问题}
+
+%---------------------------------------------
+\subsection{0$\;$1$\;$背包}
+\begin{frame}
+%\frametitle{\href{https://www.51nod.com/Challenge/Problem.html#!#problemId=1049}{最大子段和(51Nod1049)}}
+\frametitle{最大子段和(51Nod1049)}
+%------------左右分栏------
+\begin{block}{题目描述}
+	给出一个整数数组a(正负数都有)，如何找出一个连续子数组（可以一个都不取，那么结果为0），使得其中的和最大？\\
+	例如：-2,11,-4,13,-5,-2，和最大的子段为：11,-4,13。和为20。
+\end{block}
+\begin{block}{输入}
+	第1行：整数序列的长度N（2$ <= N <= 50000$)\\
+	第2 - N + 1行：N个整数（-$10^9 <= A[i] <= 10^9$）
+\end{block}	
+\begin{block}{输出}
+	输出最大子段和。
+\end{block}
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Code:}
+a[i][j]代表第i行j列的数字
+\begin{block}{代码实现  （复杂度为$O(n^2)$）}
+\begin{lstlisting}
+for(int i=n-1;i>0;i--)
+for(int j=1;j<=i;j++)
+a[i][j] += max(a[i+1][j],a[i+1][j+1]);
+printf("%d\n",a[1][1]);
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+%---------------------------------------------
+\subsection{完全背包}
+\begin{frame}
+%\frametitle{\href{https://www.51nod.com/Challenge/Problem.html\!\problemId=1083}{矩阵取数问题(51Nod1083)}}
+\frametitle{最长公共子序列()}
+
+%------------左右分栏------
+\begin{minipage}[b]{0.30\linewidth}
+\includegraphics[scale=0.7]{pic/num2.jpg}
+\end{minipage}
+\hfill
+\begin{minipage}[b]{0.55\linewidth}
+
+给定一个m行n列的矩阵，矩阵每个元素是一个正整数，你现在在左上角（第一行第一列），你需要走到右下角（第m行，第n列），每次只能朝右或者下走到相邻的位置，不能走出矩阵。走过的数的总和作为你的得分，求最大的得分。
+
+\end{minipage}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Code:}
+a[i][j]代表第i行j列的数字
+\begin{block}{代码实现  （复杂度为$O(n^2)$）}
+\begin{lstlisting}
+for(int i=1;i<=n;i++)
+for(int j=1;j<=n;j++)
+if(i==1)    
+a[i][j] += a[i][j-1];
+else if(j==1)
+a[i][j] += a[i-1][j];
+else
+a[i][j] += max(a[i-1][j],a[i][j-1]);
+printf("%d\n",a[n][n]);
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+%---------------------------------------------
+\subsection{多重背包}
+\begin{frame}
+%\frametitle{\href{https://www.51nod.com/Challenge/Problem.html\!\problemId=1083}{矩阵取数问题(51Nod1083)}}
+\frametitle{最长上升子序列()}
+
+%------------左右分栏------
+\begin{minipage}[b]{0.30\linewidth}
+\includegraphics[scale=0.7]{pic/num2.jpg}
+\end{minipage}
+\hfill
+\begin{minipage}[b]{0.55\linewidth}
+
+给定一个m行n列的矩阵，矩阵每个元素是一个正整数，你现在在左上角（第一行第一列），你需要走到右下角（第m行，第n列），每次只能朝右或者下走到相邻的位置，不能走出矩阵。走过的数的总和作为你的得分，求最大的得分。
+
+\end{minipage}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Code:}
+a[i][j]代表第i行j列的数字
+\begin{block}{代码实现  （复杂度为$O(n^2)$）}
+\begin{lstlisting}
+for(int i=1;i<=n;i++)
+for(int j=1;j<=n;j++)
+if(i==1)    
+a[i][j] += a[i][j-1];
+else if(j==1)
+a[i][j] += a[i-1][j];
+else
+a[i][j] += max(a[i-1][j],a[i][j-1]);
+printf("%d\n",a[n][n]);
+\end{lstlisting}
+\end{block}
+\end{frame}
+\textbf{}
+
+%---------多行注释-----|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+%\iffalse
+\begin{frame}[fragile]
+\frametitle{算法描述}
+数学表述：
+\begin{itemize}
+\item ${\displaystyle \gcd(a,0)=a}$
+\item ${\displaystyle \gcd(a,b)=\gcd(b,a\,\mathrm {mod} \,b)} $
+\end{itemize}
+\begin{block}{代码实现  （复杂度为O(logn)）}
+\begin{lstlisting}
+int gcd(a, b) {
+return b ? gcd(b, a % b) : a;
+}
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+
+\begin{frame}[fragile]
+\frametitle{算法描述}
+数学表述：
+\begin{itemize}
+\item ${\displaystyle \gcd(a,0)=a}$
+\item ${\displaystyle \gcd(a,b)=\gcd(b,a\,\mathrm {mod} \,b)} $
+\end{itemize}
+\begin{block}{代码实现  （复杂度为O(logn)）}
+\begin{lstlisting}
+int gcd(a, b) {
+return b ? gcd(b, a % b) : a;
+}
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+
+
+%-------------------------------------------------------------------------------------------------
+
+\section{A}
+\subsection{定义}
+\begin{frame}
+\frametitle{定义}
+ 如果用暴力匹配的思路，并假设现在文本串S匹配到 i 位置，模式串P匹配到 j 位置，则有：
+\begin{itemize}
+\item 如果当前字符匹配成功（即S[i] == P[j]），则i++，j++，继续匹配下一个字符；
+\item 如果失配（即S[i]! = P[j]），令i = i - (j - 1)，j = 0。相当于每次匹配失败时，i 回溯，j 被置为0
+
+\end{itemize}
+\begin{block}
+	
+\end{block}
+\end{frame}
+
+\subsection{辗转相除法}
+\begin{frame}[fragile]
+\frametitle{算法描述}
+数学表述：
+\begin{itemize}
+\item ${\displaystyle \gcd(a,0)=a}$
+\item ${\displaystyle \gcd(a,b)=\gcd(b,a\,\mathrm {mod} \,b)} $
+\end{itemize}
+\begin{block}{代码实现  （复杂度为O(logn)）}
+\begin{lstlisting}
+int gcd(a, b) {
+    return b ? gcd(b, a % b) : a;
+}
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+%-----------------------------------------------------------------------------------------------------
+\section{B}
+\subsection{定义}
+\begin{frame}
+\frametitle{定义}
+\begin{itemize}
+\item 若有一个数X，可以被另外两个数A、B整除，且X大于（或等于）A和B，则X为A和B的公倍数。A和B的公倍数有无限个，而所有的公倍数中，最小的公倍数就叫做最小公倍数。
+\item 与最大公因数之关系 $$ \operatorname {lcm}(a,b)={\frac  {|a\cdot b|}{\operatorname {gcd}(a,b)}} $$
+\end{itemize}
+\end{frame}
+
+%-----------------------------------------------------------------------------------------------------
+\section{C}
+\subsection{素数定义}
+\begin{frame}
+\frametitle{定义}
+\begin{itemize}
+\item 质数（Prime number），又称素数，指在大于1的自然数中，除了1和该数自身外，无法被其他自然数整除的数（也可定义为只有1与该数本身两个正因数的数）。大于1的自然数若不是素数，则称之为合数。
+\item 例如，5是个素数，因为其正约数只有1与5。而6则是个合数，因为除了1与6外，2与3也是其正约数。
+\end{itemize}
+\end{frame}
+
+\subsection{常见题型}
+\begin{frame}
+\frametitle{问题}
+\begin{itemize}
+\item $ n<10^{16} $，单次询问，判断n是否为素数
+\item  $n<10^7 $，$ k<10^5 $，判断 $ a_1,a_2, ... , a_k < n $，是否为素数
+\item  $n<10^{8} $，单次询问，求不超过 $n$ 的素数数量
+\item  $l < n < r < ^{14} , r - l < 10^4 $，单次询问，求在区间 $[l, r]$ 中的素数数量
+\end{itemize}
+\end{frame}
+
+\subsection{埃拉托斯特尼筛法}
+\begin{frame}
+\frametitle{埃拉托斯特尼筛法}
+\begin{itemize}
+\item 基本思想：素数的倍数一定不是素数
+\item 实现方法：用一个长度为N+1的数组保存信息（0表示素数，1表示非素数），先假设所有的数都是素数（初始化为0），从第一个素数2开始，把2的倍数都标记为非素数（置为1），一直到大于N；然后进行下一趟，找到2后面的下一个素数3，进行同样的处理，直到最后，数组中依然为0的数即为素数。
+\item 说明：整数1特殊处理即可。
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{比埃拉托斯特尼筛法}
+prim[] 中值为0代表素数、1代表合数
+\begin{block}{代码实现  （复杂度为O(nloglogn)）}
+\begin{lstlisting}
+    prim[1] = 1;
+    for(int i=2;i*i<TOP;i++)
+        if(!prim[i]) for(int j=i*i;j<TOP;j+=i)
+                prim[j]=1;
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+\subsection{欧拉筛法}
+\begin{frame}[fragile]
+\frametitle{比埃拉托斯特尼筛法稍快的欧拉筛法}
+掌握埃拉托斯特尼筛法即可，速度差不太远
+\begin{block}{代码实现  （复杂度为O(n)）}
+\begin{lstlisting}
+    for(int i = 2; i < MAXN; ++i) {
+        if(!p[i])  prm[sz++] = i;
+        for(int j = 0; j < sz; ++j) {
+            int t = i * prm[j];
+            if(t >= MAXN) break;
+            p[t] = true;
+            if(i%prm[j] == 0) break;
+        }
+    }
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+%-----------------------------------------------------------------------------------------------------
+\section{D}
+\subsection{问题与应用}
+\begin{frame}
+\begin{itemize}
+\item $a,n < INF, m < 10^{18}$ 求 $a^n \mod m$
+\item $a_0, q < INF, m < 10^{18}$ 求 $a_n=a_0*q^n \mod m$
+\end{itemize}
+\end{frame}
+
+\subsection{代码实现}
+\begin{frame}[fragile]
+\frametitle{代码实现}
+\begin{block}{代码实现  （复杂度为O(logn)）}
+\begin{lstlisting}
+typedef long long ll;
+ll pow_mod(ll a, ll n) {
+    ll res = 1;
+    while(n) {
+        if(n&1) res = res * a % MOD;
+        a = a * a % MOD;
+        n >>= 1;
+    }
+    return res;
+}
+\end{lstlisting}
+\end{block}
+\end{frame}
+\fi
+
+\end{document}
