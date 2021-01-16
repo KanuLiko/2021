@@ -1,9 +1,17 @@
-\documentclass[15pt,letterpaper]{article}
+\documentclass{article}
 \usepackage{amsmath}
 \usepackage{graphicx}
 \usepackage{fancyhdr}
 \usepackage{pgfplots}
+\usepackage{bm}
+\usepackage{geometry}
+\usepackage{pgfplots}
+\usepackage{fontspec}
+
+
+\geometry{left=2.0cm,right=2.0cm,top=2.5cm,bottom=2.5cm}
 \pgfplotsset{compat = 1.16}
+\setmainfont{Consolas}
 
 \title{Test tex!}
 \author{NUAA}
@@ -102,7 +110,6 @@ $$
 	 \frac{1}{2\sqrt{4}}
 	 \approx \framebox{$-0.1113$}
 	$$
-\newpage
 \paragraph{2.1}
 \textit{
 	\textbf{A} Find the root of the 
@@ -111,5 +118,21 @@ $$
 }
 $$
 	x = \frac{-b\pm\sqrt{b^2-4ac}}{2a}
+$$
+\section{\textit{Weighted Residual Methods}}
+\textbf{Fundamental equations} Consider the problem governed by the differential equation:
+$$ \bm{\Gamma u = -\overline{f}}\quad in\;D $$
+\textit{The above differential equation is solved by using the boundary conditions given as follows:}
+$$
+\bm{u=-\overline{u}}\quad on\;S_u
+$$
+$$
+\bm{t\equiv Bu = \overline{t}}\quad on\;S\!\setminus\!S_t
+$$
+\textit{where the boundary $S$ consists of $S_t$ and $S_u$.\;The boundary conditions given in eqs.$(84)$ and $(85)$ are called rigid and natural boundary conditions,or Dirichlet and Neumann
+boundary conditions,respectively.\;In most engineering problems,$\bm{\Gamma}$ and $\bm{B}$ are different operators in the forms of $bm{\Gamma} = \bm{\Delta\cdot\varSigma}$ and $\bm{B}=
+\bm{n\cdot\varSigma}$,where $\varsigma$ is another differential operators and $\bm{n}$ is the normal vector on $S_t$.}
+$$
+\Delta^2 u = -\;\overline{f}\quad in\;D,
 $$
 \end{document}
