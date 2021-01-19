@@ -48,16 +48,11 @@ $$\displaystyle\int_{-1}^{+\infty} f(x)\mathrm{d}x$$
 拉普拉斯算子:$\nabla\cdot\nabla u = \Delta u$ 
 $${a+b \choose a+b+c}$$
 $$\min\limits^{x\in\mathcal{R}}f(x)$$
-$$\dfrac{\mathrm{d}u}{\mathrm{d}t}
-=
-\dfrac{\partial u}{\partial x}\dfrac{\partial x}{\partial t}
-+
-\dfrac{\partial u}{\partial y}\dfrac{\partial y}{\partial t}
-$$
-
-> 最外层 
+ 
 > 最外层 
 > > 第一层
 > > > 第二层
+
+<iframe src="http://www.netpad.net.cn/thirdInnerPad.html#posts/623" width="650" height="550" scrolling="yes" class="iframe-class" frameborder="0"></iframe>
 
 </font>
