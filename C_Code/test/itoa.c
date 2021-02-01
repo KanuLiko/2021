@@ -18,5 +18,5 @@ char* itoa (char* buf, unsigned int num) {
         buf[i--] = '0'; // 0x0000005a 中间补全的0
     }
     buf[10] = 0; // 最后1位的\0
-    return buf;
+    return "hello";
 }

@@ -30,6 +30,7 @@ int main(int args, const char **argv)
     char *buf1;
     char *buf2;
     char *str;
+    printf("hello world!\n");
     printf("%s\n", itoa(buf1, a));
     /*
     printf("%s\n", itoa(1u<<a,str,2));

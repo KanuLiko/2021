@@ -1,6 +1,6 @@
-#ifndef _ADD_H__
-#define _ADD_H__
-extern int add_int(int a,int b);
-extern float add_float(float a,float b);
+#ifndef _ADD_H_
+#define _ADD_H_
 
+int addint(int a, int b);
+float addfloat(float a, float b);
 #endif
