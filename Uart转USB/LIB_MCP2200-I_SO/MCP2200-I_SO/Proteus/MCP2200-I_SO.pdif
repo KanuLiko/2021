@@ -1,0 +1,218 @@
+;Proteus Design Interchange Format
+(PDIF
+ (vendor "SamacSys Limited")
+ (version 1 0)
+ (library
+  (part "MCP2200-I_SO"
+   (description "USB 2.0 to serial UART converter w/ GPIO")
+   (family "ANA")
+   (package "SOIC127P1030X265-20N")
+   (attribute "Datasheet Link" "http://ww1.microchip.com/downloads/en/DeviceDoc/22228B.pdf")
+   (attribute "Geometry.Height" "2.65mm")
+   (attribute "Manufacturer_Name" "Microchip")
+   (attribute "Manufacturer_Part_Number" "MCP2200-I/SO")
+   (attribute "Mouser Part Number" "579-MCP2200-I/SO")
+   (attribute "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Microchip-Technology/MCP2200-I-SO/?qs=kI7nsUnms46fN8L9VZlJCA%3D%3D")
+   (attribute "Arrow Part Number" "MCP2200-I/SO")
+   (attribute "Arrow Price/Stock" "https://www.arrow.com/en/products/mcp2200-iso/microchip-technology")
+   (gate
+    (symbol "MCP2200-I_SO")
+    (pin "VDD" 1 PS)
+    (pin "OSC1" 2 PS)
+    (pin "OSC2" 3 PS)
+    (pin "RST" 4 PS)
+    (pin "GP7/TXLED" 5 PS)
+    (pin "GP6/RXLED" 6 PS)
+    (pin "GP5" 7 PS)
+    (pin "GP4" 8 PS)
+    (pin "GP3" 9 PS)
+    (pin "TX" 10 PS)
+    (pin "VSS" 20 PS)
+    (pin "D+" 19 PS)
+    (pin "D-" 18 PS)
+    (pin "VUSB" 17 PS)
+    (pin "GP0/SSPND" 16 PS)
+    (pin "GP1/USBCFG" 15 PS)
+    (pin "GP2" 14 PS)
+    (pin "CTS" 13 PS)
+    (pin "RX" 12 PS)
+    (pin "RTS" 11 PS)
+   )
+  )
+  (symbol "MCP2200-I_SO"
+   (units THOU)
+   (origin (pt 0 0))
+   (graphic
+    (stroke 10)
+    (path (pt 200 100) (pt 1500 100) (pt 1500 -1000) (pt 200 -1000) (pt 200 100) (closed))
+   )
+   (terminal
+    (body (symbol "PIN") (pt 0 0) (rot 0) (mir 0) (visible true))
+    (name (pt 230 0) (rot 0) (just MIDDLE LEFT) (visible true))
+    (number (pt 140 20) (rot 0) (just BOTTOM RIGHT) (visible true)))
+   (terminal
+    (body (symbol "PIN") (pt 0 -100) (rot 0) (mir 0) (visible true))
+    (name (pt 230 0) (rot 0) (just MIDDLE LEFT) (visible true))
+    (number (pt 140 20) (rot 0) (just BOTTOM RIGHT) (visible true)))
+   (terminal
+    (body (symbol "PIN") (pt 0 -200) (rot 0) (mir 0) (visible true))
+    (name (pt 230 0) (rot 0) (just MIDDLE LEFT) (visible true))
+    (number (pt 140 20) (rot 0) (just BOTTOM RIGHT) (visible true)))
+   (terminal
+    (body (symbol "PIN") (pt 0 -300) (rot 0) (mir 0) (visible true))
+    (name (pt 230 0) (rot 0) (just MIDDLE LEFT) (visible true))
+    (number (pt 140 20) (rot 0) (just BOTTOM RIGHT) (visible true)))
+   (terminal
+    (body (symbol "PIN") (pt 0 -400) (rot 0) (mir 0) (visible true))
+    (name (pt 230 0) (rot 0) (just MIDDLE LEFT) (visible true))
+    (number (pt 140 20) (rot 0) (just BOTTOM RIGHT) (visible true)))
+   (terminal
+    (body (symbol "PIN") (pt 0 -500) (rot 0) (mir 0) (visible true))
+    (name (pt 230 0) (rot 0) (just MIDDLE LEFT) (visible true))
+    (number (pt 140 20) (rot 0) (just BOTTOM RIGHT) (visible true)))
+   (terminal
+    (body (symbol "PIN") (pt 0 -600) (rot 0) (mir 0) (visible true))
+    (name (pt 230 0) (rot 0) (just MIDDLE LEFT) (visible true))
+    (number (pt 140 20) (rot 0) (just BOTTOM RIGHT) (visible true)))
+   (terminal
+    (body (symbol "PIN") (pt 0 -700) (rot 0) (mir 0) (visible true))
+    (name (pt 230 0) (rot 0) (just MIDDLE LEFT) (visible true))
+    (number (pt 140 20) (rot 0) (just BOTTOM RIGHT) (visible true)))
+   (terminal
+    (body (symbol "PIN") (pt 0 -800) (rot 0) (mir 0) (visible true))
+    (name (pt 230 0) (rot 0) (just MIDDLE LEFT) (visible true))
+    (number (pt 140 20) (rot 0) (just BOTTOM RIGHT) (visible true)))
+   (terminal
+    (body (symbol "PIN") (pt 0 -900) (rot 0) (mir 0) (visible true))
+    (name (pt 230 0) (rot 0) (just MIDDLE LEFT) (visible true))
+    (number (pt 140 20) (rot 0) (just BOTTOM RIGHT) (visible true)))
+   (terminal
+    (body (symbol "PIN") (pt 1700 0) (rot 0) (mir X) (visible true))
+    (name (pt 230 0) (rot 0) (just MIDDLE LEFT) (visible true))
+    (number (pt 140 20) (rot 0) (just BOTTOM RIGHT) (visible true)))
+   (terminal
+    (body (symbol "PIN") (pt 1700 -100) (rot 0) (mir X) (visible true))
+    (name (pt 230 0) (rot 0) (just MIDDLE LEFT) (visible true))
+    (number (pt 140 20) (rot 0) (just BOTTOM RIGHT) (visible true)))
+   (terminal
+    (body (symbol "PIN") (pt 1700 -200) (rot 0) (mir X) (visible true))
+    (name (pt 230 0) (rot 0) (just MIDDLE LEFT) (visible true))
+    (number (pt 140 20) (rot 0) (just BOTTOM RIGHT) (visible true)))
+   (terminal
+    (body (symbol "PIN") (pt 1700 -300) (rot 0) (mir X) (visible true))
+    (name (pt 230 0) (rot 0) (just MIDDLE LEFT) (visible true))
+    (number (pt 140 20) (rot 0) (just BOTTOM RIGHT) (visible true)))
+   (terminal
+    (body (symbol "PIN") (pt 1700 -400) (rot 0) (mir X) (visible true))
+    (name (pt 230 0) (rot 0) (just MIDDLE LEFT) (visible true))
+    (number (pt 140 20) (rot 0) (just BOTTOM RIGHT) (visible true)))
+   (terminal
+    (body (symbol "PIN") (pt 1700 -500) (rot 0) (mir X) (visible true))
+    (name (pt 230 0) (rot 0) (just MIDDLE LEFT) (visible true))
+    (number (pt 140 20) (rot 0) (just BOTTOM RIGHT) (visible true)))
+   (terminal
+    (body (symbol "PIN") (pt 1700 -600) (rot 0) (mir X) (visible true))
+    (name (pt 230 0) (rot 0) (just MIDDLE LEFT) (visible true))
+    (number (pt 140 20) (rot 0) (just BOTTOM RIGHT) (visible true)))
+   (terminal
+    (body (symbol "PIN") (pt 1700 -700) (rot 0) (mir X) (visible true))
+    (name (pt 230 0) (rot 0) (just MIDDLE LEFT) (visible true))
+    (number (pt 140 20) (rot 0) (just BOTTOM RIGHT) (visible true)))
+   (terminal
+    (body (symbol "PIN") (pt 1700 -800) (rot 0) (mir X) (visible true))
+    (name (pt 230 0) (rot 0) (just MIDDLE LEFT) (visible true))
+    (number (pt 140 20) (rot 0) (just BOTTOM RIGHT) (visible true)))
+   (terminal
+    (body (symbol "PIN") (pt 1700 -900) (rot 0) (mir X) (visible true))
+    (name (pt 230 0) (rot 0) (just MIDDLE LEFT) (visible true))
+    (number (pt 140 20) (rot 0) (just BOTTOM RIGHT) (visible true)))
+  )
+  (symbol "PIN"
+   (units THOU)
+   (origin (pt 0 0))
+   (graphic
+    (stroke 10)
+    (path (pt 0 0) (pt 200 0))))
+  (symbol "PINSHORT"
+   (units THOU)
+   (origin (pt 0 0))
+   (graphic
+    (stroke 10)
+    (path (pt 0 0) (pt 100 0))))
+  (package "SOIC127P1030X265-20N"
+   (units MM)
+   (layer OCCA
+    (graphic
+     (stroke 0.05)
+     (path
+      (closed true)
+      (pt -5.85 6.65)
+      (pt 5.85 6.65)
+      (pt 5.85 -6.65)
+      (pt -5.85 -6.65)
+      (pt -5.85 6.65))))
+   (layer TASM
+    (graphic
+     (stroke 0.1)
+     (path
+      (closed true)
+      (pt -3.75 6.4)
+      (pt 3.75 6.4)
+      (pt 3.75 -6.4)
+      (pt -3.75 -6.4)
+      (pt -3.75 6.4))))
+   (layer TASM
+    (graphic
+     (stroke 0.1)
+     (path
+      (closed false)
+      (pt -3.75 5.13)
+      (pt -2.48 6.4))))
+   (layer TSLK
+    (graphic
+     (stroke 0.2)
+     (path
+      (closed true)
+      (pt -3.4 6.4)
+      (pt 3.4 6.4)
+      (pt 3.4 -6.4)
+      (pt -3.4 -6.4)
+      (pt -3.4 6.4))))
+   (layer TSLK
+    (graphic
+     (stroke 0.2)
+     (path
+      (closed false)
+      (pt -5.6 6.39)
+      (pt -3.75 6.39))))
+   (leg 1 (pt -4.675 5.715) (padstack 0))
+   (leg 2 (pt -4.675 4.445) (padstack 0))
+   (leg 3 (pt -4.675 3.175) (padstack 0))
+   (leg 4 (pt -4.675 1.905) (padstack 0))
+   (leg 5 (pt -4.675 0.635) (padstack 0))
+   (leg 6 (pt -4.675 -0.635) (padstack 0))
+   (leg 7 (pt -4.675 -1.905) (padstack 0))
+   (leg 8 (pt -4.675 -3.175) (padstack 0))
+   (leg 9 (pt -4.675 -4.445) (padstack 0))
+   (leg 10 (pt -4.675 -5.715) (padstack 0))
+   (leg 11 (pt 4.675 -5.715) (padstack 0))
+   (leg 12 (pt 4.675 -4.445) (padstack 0))
+   (leg 13 (pt 4.675 -3.175) (padstack 0))
+   (leg 14 (pt 4.675 -1.905) (padstack 0))
+   (leg 15 (pt 4.675 -0.635) (padstack 0))
+   (leg 16 (pt 4.675 0.635) (padstack 0))
+   (leg 17 (pt 4.675 1.905) (padstack 0))
+   (leg 18 (pt 4.675 3.175) (padstack 0))
+   (leg 19 (pt 4.675 4.445) (padstack 0))
+   (leg 20 (pt 4.675 5.715) (padstack 0))
+   (padstack 0
+    (plated false)
+    (pad (layer TCOP) (rectf 0.65 1.85 0 0 0))
+   )
+   (model "MCP2200-I_SO.stp"
+    (euler 0 0 0)
+    (offset 0 0 0)
+   )
+  )
+ )
+)

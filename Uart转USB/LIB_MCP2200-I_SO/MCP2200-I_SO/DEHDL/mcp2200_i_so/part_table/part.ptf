@@ -1,0 +1,11 @@
+FILE_TYPE = MULTI_PHYS_TABLE;
+
+PART 'MCP2200_I_SO'
+CLASS = IC
+{========================================================================================}
+:"MANUFACTURER_NAME", "MANUFACTURER_PART_NUMBER"= "PART_NUMBER", "JEDEC_TYPE", "PACK_TYPE", "MOUSER_PART_NUMBER", "MOUSER_PRICE/STOCK", "ARROW_PART_NUMBER", "ARROW_PRICE/STOCK", "DESCRIPTION", "DATASHEET", "HEIGHT";
+{========================================================================================}
+ "Microchip", "MCP2200-I/SO" (!) = "", "SOIC127P1030X265-20N", "Small Outline Packages", "579-MCP2200-I/SO", "https://www.mouser.co.uk/ProductDetail/Microchip-Technology/MCP2200-I-SO/?qs=kI7nsUnms46fN8L9VZlJCA%3D%3D", "MCP2200-I/SO", "https://www.arrow.com/en/products/mcp2200-iso/microchip-technology", "USB 2.0 to serial UART converter w/ GPIO", "http://ww1.microchip.com/downloads/en/DeviceDoc/22228B.pdf", "2.65 mm"
+END_PART
+
+END.
