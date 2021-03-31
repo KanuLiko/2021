@@ -34,7 +34,7 @@ void set_pll(pll_e pll, u32 div){
             if (div < 27 && div > 54) return; //AUDIO_PLL的倍频参数的有效范围为27-54
             //AUDIO_PLL的分频参数NUM和DEMON都设置为0xF
             write32(0xF, &anadig->analog_pll_audio_num);
-            write32(0xF, &anadig->analog_pll_audio_demon);
+            write32(0xF, &anadig->analog_pll_audio_denom);
 
             write32(ENABLE_MASK | div, &anadig->analog_pll_audio);
             wait_to_lock(&anadig->analog_pll_audio);//等待AUDIO_PLL锁定
@@ -43,7 +43,7 @@ void set_pll(pll_e pll, u32 div){
             if (div < 27 && div >54) return; //VIDEO_PLL的倍频参数的有效范围是27到54
             //VIDEO_PLL的分频参数NUM和DEMON都设置为0xF
             write32(0xF, &anadig->analog_pll_video_num);
-            write32(0xF, &anadig->analog_pll_video_demon);
+            write32(0xF, &anadig->analog_pll_video_denom);
 
             write32(ENABLE_MASK | div, &anadig->analog_pll_video);
             wait_to_lock(&anadig->analog_pll_video); //等待VIDEO_PLL锁定
@@ -108,7 +108,7 @@ u32 get_pll(pll_e pll){
                 //AUDIO_PLL的分频参数:0表示除以4,1表示除以2,2表示除以1
                 post_div = 1 << (2-post_div);
                 pll_num = read32(&anadig->analog_pll_audio_num);
-                pll_denom = read32(&anadig->analog_pll_audio_demon);
+                pll_denom = read32(&anadig->analog_pll_audio_denom);
 
                 return CKIH * (div + pll_num / pll_denom) / post_div;
             }
@@ -128,7 +128,7 @@ u32 get_pll(pll_e pll){
                 post_div = 1 << (2 - post_div);
                 
                 pll_num = read32(&anadig->analog_pll_video_num);
-                pll_denom = read32(&anadig->analog_pll_video_demon);
+                pll_denom = read32(&anadig->analog_pll_video_denom);
                 
                 return CKIH * (div + pll_num / pll_denom) / post_div;
             }
