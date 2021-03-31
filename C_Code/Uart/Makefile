@@ -6,7 +6,7 @@ OBJCOPY=$(PREFIX)objcopy
 OBJDUMP=$(PREFIX)objdump 
 
 uart.img : start.S uart.c main.c 
-	$(CC) -nostdlib -g -c -o start.o start.c 
+	$(CC) -nostdlib -g -c -o start.o start.S
 	$(CC) -nostdlib -g -c -o uart.o uart.c 	
 	$(CC) -nostdlib -g -c -o main.o main.c 
 
