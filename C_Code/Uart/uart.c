@@ -48,7 +48,7 @@ void Uart_Init(void){
 	 */
     UART1->UFCR = 5<<7;
 
-    UART1->UBIR = 71;
+    UART1->UBIR = 5;
 
     UART1->UBMR = 3124;
 

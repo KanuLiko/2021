@@ -78,7 +78,7 @@ Disassembly of section .text:
 801000d2:	f8c3 2090 	str.w	r2, [r3, #144]	; 0x90
 801000d6:	2300      	movs	r3, #0
 801000d8:	f2c0 2302 	movt	r3, #514	; 0x202
-801000dc:	2247      	movs	r2, #71	; 0x47
+801000dc:	2205      	movs	r2, #5
 801000de:	f8c3 20a4 	str.w	r2, [r3, #164]	; 0xa4
 801000e2:	2300      	movs	r3, #0
 801000e4:	f2c0 2302 	movt	r3, #514	; 0x202
