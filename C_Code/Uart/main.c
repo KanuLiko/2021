@@ -2,17 +2,14 @@
 int main(){
     unsigned char cTestData;
     Uart_Init();
+    PutStr("Hello, world!\n\r");
     while(1){
         cTestData = GetChar();
-        PutChar(cTestData)   ;
+        if(cTestData=='\n')
+            PutChar('\n');
+        if(cTestData == '\r')
+            PutChar('\r');
+        PutChar(cTestData);
     }
     return 0;
 }
-/*
-    unsigned char cTestDataSpace = 32;
-    while(1){
-        PutChar(cTestData);
-        PutChar(cTestDataSpace);
-        for(int i=0;i<10000;i++);
-    }
-*/

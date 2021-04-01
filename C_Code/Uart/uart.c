@@ -64,3 +64,10 @@ unsigned char GetChar(void){
 	while(!(UART1->USR2 & (1<<0)));
 	return (unsigned char)UART1->URXD;
 }
+
+void PutStr(const char *s){
+	while(*s){
+		PutStr(*s);
+		s++;
+	}
+}
