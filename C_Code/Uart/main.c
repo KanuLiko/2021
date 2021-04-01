@@ -8,7 +8,7 @@ int main(){
     int i;
     Uart_Init();
     for(i=0;i<10;i++){
-        cTestData = (char)i;
+        cTestData = (unsigned char)i;
         PutChar(cTestData);
         delay();
     }
