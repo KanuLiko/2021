@@ -8,7 +8,6 @@ int main(){
     Uart_Init();
     while(1){
         PutChar(cTestData);
-        PutChar(" ");
         delay();
     }
     return 0;
