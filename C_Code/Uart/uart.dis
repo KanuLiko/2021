@@ -142,27 +142,28 @@ Disassembly of section .text:
 8010016c:	b580      	push	{r7, lr}
 8010016e:	b082      	sub	sp, #8
 80100170:	af00      	add	r7, sp, #0
-80100172:	f7ff ff63 	bl	8010003c <Uart_Init>
-80100176:	2300      	movs	r3, #0
-80100178:	607b      	str	r3, [r7, #4]
-8010017a:	e00a      	b.n	80100192 <main+0x26>
-8010017c:	687b      	ldr	r3, [r7, #4]
-8010017e:	70fb      	strb	r3, [r7, #3]
-80100180:	78fb      	ldrb	r3, [r7, #3]
+80100172:	f240 139c 	movw	r3, #412	; 0x19c
+80100176:	f2c8 0310 	movt	r3, #32784	; 0x8010
+8010017a:	71fb      	strb	r3, [r7, #7]
+8010017c:	f7ff ff5e 	bl	8010003c <Uart_Init>
+80100180:	79fb      	ldrb	r3, [r7, #7]
 80100182:	4618      	mov	r0, r3
 80100184:	f7ff ffc5 	bl	80100112 <PutChar>
-80100188:	f7ff ffdd 	bl	80100146 <delay>
-8010018c:	687b      	ldr	r3, [r7, #4]
-8010018e:	3301      	adds	r3, #1
-80100190:	607b      	str	r3, [r7, #4]
-80100192:	687b      	ldr	r3, [r7, #4]
-80100194:	2b09      	cmp	r3, #9
-80100196:	ddf1      	ble.n	8010017c <main+0x10>
-80100198:	2300      	movs	r3, #0
-8010019a:	4618      	mov	r0, r3
-8010019c:	3708      	adds	r7, #8
-8010019e:	46bd      	mov	sp, r7
-801001a0:	bd80      	pop	{r7, pc}
+80100188:	f240 13a0 	movw	r3, #416	; 0x1a0
+8010018c:	f2c8 0310 	movt	r3, #32784	; 0x8010
+80100190:	4618      	mov	r0, r3
+80100192:	f7ff ffbe 	bl	80100112 <PutChar>
+80100196:	f7ff ffd6 	bl	80100146 <delay>
+8010019a:	e7f1      	b.n	80100180 <main+0x14>
+
+Disassembly of section .rodata:
+
+8010019c <.LC0>:
+8010019c:	00000046 	andeq	r0, r0, r6, asr #32
+
+801001a0 <.LC1>:
+801001a0:	Address 0x00000000801001a0 is out of bounds.
+
 
 Disassembly of section .bss:
 
@@ -248,7 +249,7 @@ Disassembly of section .debug_line:
   94:	20060104 	andcs	r0, r6, r4, lsl #2
   98:	02679106 	rsbeq	r9, r7, #-2147483647	; 0x80000001
   9c:	01010006 	tsteq	r1, r6
-  a0:	0000005e 	andeq	r0, r0, lr, asr r0
+  a0:	00000055 	andeq	r0, r0, r5, asr r0
   a4:	001d0002 	andseq	r0, sp, r2
   a8:	01020000 	mrseq	r0, (UNDEF: 2)
   ac:	000d0efb 	strdeq	r0, [sp], -fp
@@ -263,16 +264,14 @@ Disassembly of section .debug_line:
   d0:	03040200 	movweq	r0, #16896	; 0x4200
   d4:	02003c06 	andeq	r3, r0, #1536	; 0x600
   d8:	063c0104 	ldrteq	r0, [ip], -r4, lsl #2
-  dc:	2f3f674b 	svccs	0x003f674b
-  e0:	03040200 	movweq	r0, #16896	; 0x4200
-  e4:	0402003d 	streq	r0, [r2], #-61	; 0xffffffc3
-  e8:	02002f03 	andeq	r2, r0, #3, 30
-  ec:	004b0304 	subeq	r0, fp, r4, lsl #6
-  f0:	2b030402 	blcs	c1100 <_start-0x8003ef00>
-  f4:	01040200 	mrseq	r0, R12_usr
-  f8:	41063c06 	tstmi	r6, r6, lsl #24
-  fc:	00040221 	andeq	r0, r4, r1, lsr #4
- 100:	Address 0x0000000000000100 is out of bounds.
+  dc:	593d674b 	ldmdbpl	sp!, {r0, r1, r3, r6, r8, r9, sl, sp, lr}
+  e0:	01040200 	mrseq	r0, R12_usr
+  e4:	04020030 	streq	r0, [r2], #-48	; 0xffffffd0
+  e8:	02004b01 	andeq	r4, r0, #1024	; 0x400
+  ec:	00750104 	rsbseq	r0, r5, r4, lsl #2
+  f0:	2c010402 	cfstrscs	mvf0, [r1], {2}
+  f4:	01000102 	tsteq	r0, r2, lsl #2
+  f8:	Address 0x00000000000000f8 is out of bounds.
 
 
 Disassembly of section .debug_info:
@@ -404,14 +403,14 @@ Disassembly of section .debug_info:
  1ec:	10003c06 	andne	r3, r0, r6, lsl #24
  1f0:	0000d680 	andeq	sp, r0, r0, lsl #13
  1f4:	009c0100 	addseq	r0, ip, r0, lsl #2
- 1f8:	00000090 	muleq	r0, r0, r0
+ 1f8:	00000084 	andeq	r0, r0, r4, lsl #1
  1fc:	00e80004 	rsceq	r0, r8, r4
  200:	01040000 	mrseq	r0, (UNDEF: 4)
  204:	0000000a 	andeq	r0, r0, sl
  208:	0001890c 	andeq	r8, r1, ip, lsl #18
  20c:	00010a00 	andeq	r0, r1, r0, lsl #20
  210:	10014600 	andne	r4, r1, r0, lsl #12
- 214:	00005c80 	andeq	r5, r0, r0, lsl #25
+ 214:	00005680 	andeq	r5, r0, r0, lsl #13
  218:	0000a000 	andeq	sl, r0, r0
  21c:	07040200 	streq	r0, [r4, -r0, lsl #4]
  220:	0000016e 	andeq	r0, r0, lr, ror #2
@@ -420,27 +419,24 @@ Disassembly of section .debug_info:
  22c:	00cd0801 	sbceq	r0, sp, r1, lsl #16
  230:	9a030000 	bls	c0238 <_start-0x8003fdc8>
  234:	01000001 	tsteq	r0, r1
- 238:	00006e06 	andeq	r6, r0, r6, lsl #28
+ 238:	00006206 	andeq	r6, r0, r6, lsl #4
  23c:	10016c00 	andne	r6, r1, r0, lsl #24
- 240:	00003680 	andeq	r3, r0, r0, lsl #13
- 244:	6e9c0100 	fmlvse	f0, f4, f0
+ 240:	00003080 	andeq	r3, r0, r0, lsl #1
+ 244:	629c0100 	addsvs	r0, ip, #0, 2
  248:	04000000 	streq	r0, [r0], #-0
  24c:	00000190 	muleq	r0, r0, r1
  250:	00330701 	eorseq	r0, r3, r1, lsl #14
  254:	91020000 	mrsls	r0, (UNDEF: 2)
- 258:	00690573 	rsbeq	r0, r9, r3, ror r5
- 25c:	006e0801 	rsbeq	r0, lr, r1, lsl #16
- 260:	91020000 	mrsls	r0, (UNDEF: 2)
- 264:	04060074 	streq	r0, [r6], #-116	; 0xffffff8c
- 268:	746e6905 	strbtvc	r6, [lr], #-2309	; 0xfffff6fb
- 26c:	019f0700 	orrseq	r0, pc, r0, lsl #14
- 270:	02010000 	andeq	r0, r1, #0
- 274:	80100146 	andshi	r0, r0, r6, asr #2
- 278:	00000026 	andeq	r0, r0, r6, lsr #32
- 27c:	69059c01 	stmdbvs	r5, {r0, sl, fp, ip, pc}
- 280:	25030100 	strcs	r0, [r3, #-256]	; 0xffffff00
- 284:	02000000 	andeq	r0, r0, #0
- 288:	00007491 	muleq	r0, r1, r4
+ 258:	04050077 	streq	r0, [r5], #-119	; 0xffffff89
+ 25c:	746e6905 	strbtvc	r6, [lr], #-2309	; 0xfffff6fb
+ 260:	019f0600 	orrseq	r0, pc, r0, lsl #12
+ 264:	02010000 	andeq	r0, r1, #0
+ 268:	80100146 	andshi	r0, r0, r6, asr #2
+ 26c:	00000026 	andeq	r0, r0, r6, lsr #32
+ 270:	69079c01 	stmdbvs	r7, {r0, sl, fp, ip, pc}
+ 274:	25030100 	strcs	r0, [r3, #-256]	; 0xffffff00
+ 278:	02000000 	andeq	r0, r0, #0
+ 27c:	00007491 	muleq	r0, r1, r4
 
 Disassembly of section .debug_abbrev:
 
@@ -521,18 +517,18 @@ Disassembly of section .debug_abbrev:
  124:	3b0b3a0e 	blcc	2ce964 <_start-0x7fe3169c>
  128:	0213490b 	andseq	r4, r3, #180224	; 0x2c000
  12c:	05000018 	streq	r0, [r0, #-24]	; 0xffffffe8
- 130:	08030034 	stmdaeq	r3, {r2, r4, r5}
- 134:	0b3b0b3a 	bleq	ec2e24 <_start-0x7f23d1dc>
- 138:	18021349 	stmdane	r2, {r0, r3, r6, r8, r9, ip}
- 13c:	24060000 	strcs	r0, [r6], #-0
- 140:	3e0b0b00 	vmlacc.f64	d0, d11, d0
- 144:	0008030b 	andeq	r0, r8, fp, lsl #6
- 148:	012e0700 			; <UNDEFINED> instruction: 0x012e0700
- 14c:	0e03193f 			; <UNDEFINED> instruction: 0x0e03193f
- 150:	0b3b0b3a 	bleq	ec2e40 <_start-0x7f23d1c0>
- 154:	01111927 	tsteq	r1, r7, lsr #18
- 158:	18400612 	stmdane	r0, {r1, r4, r9, sl}^
- 15c:	00194297 	mulseq	r9, r7, r2
+ 130:	0b0b0024 	bleq	2c01c8 <_start-0x7fe3fe38>
+ 134:	08030b3e 	stmdaeq	r3, {r1, r2, r3, r4, r5, r8, r9, fp}
+ 138:	2e060000 	cdpcs	0, 0, cr0, cr6, cr0, {0}
+ 13c:	03193f01 	tsteq	r9, #1, 30
+ 140:	3b0b3a0e 	blcc	2ce980 <_start-0x7fe31680>
+ 144:	1119270b 	tstne	r9, fp, lsl #14
+ 148:	40061201 	andmi	r1, r6, r1, lsl #4
+ 14c:	19429718 	stmdbne	r2, {r3, r4, r8, r9, sl, ip, pc}^
+ 150:	34070000 	strcc	r0, [r7], #-0
+ 154:	3a080300 	bcc	200d5c <_start-0x7feff2a4>
+ 158:	490b3b0b 	stmdbmi	fp, {r0, r1, r3, r8, r9, fp, ip, sp}
+ 15c:	00180213 	andseq	r0, r8, r3, lsl r2
 	...
 
 Disassembly of section .debug_aranges:
@@ -557,7 +553,7 @@ Disassembly of section .debug_aranges:
   48:	00040000 	andeq	r0, r4, r0
   4c:	00000000 	andeq	r0, r0, r0
   50:	80100146 	andshi	r0, r0, r6, asr #2
-  54:	0000005c 	andeq	r0, r0, ip, asr r0
+  54:	00000056 	andeq	r0, r0, r6, asr r0
 	...
 
 Disassembly of section .debug_str:
@@ -709,12 +705,11 @@ Disassembly of section .debug_frame:
   84:	0d41040e 	cfstrdeq	mvd0, [r1, #-56]	; 0xffffffc8
   88:	0ec7420d 	cdpeq	2, 12, cr4, cr7, cr13, {0}
   8c:	00000000 	andeq	r0, r0, r0
-  90:	00000020 	andeq	r0, r0, r0, lsr #32
+  90:	0000001c 	andeq	r0, r0, ip, lsl r0
   94:	00000058 	andeq	r0, r0, r8, asr r0
   98:	8010016c 	andshi	r0, r0, ip, ror #2
-  9c:	00000036 	andeq	r0, r0, r6, lsr r0
+  9c:	00000030 	andeq	r0, r0, r0, lsr r0
   a0:	87080e41 	strhi	r0, [r8, -r1, asr #28]
   a4:	41018e02 	tstmi	r1, r2, lsl #28
   a8:	0d41100e 	stcleq	0, cr1, [r1, #-56]	; 0xffffffc8
-  ac:	080e5607 	stmdaeq	lr, {r0, r1, r2, r9, sl, ip, lr}
-  b0:	000d0d41 	andeq	r0, sp, r1, asr #26
+  ac:	00000007 	andeq	r0, r0, r7

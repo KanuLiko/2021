@@ -4,12 +4,11 @@ void delay(void){
     for(i=0;i<1000;i++);
 }
 int main(){
-    unsigned char cTestData;
-    int i;
+    unsigned char cTestData = "F";
     Uart_Init();
-    for(i=0;i<10;i++){
-        cTestData = (unsigned char)i;
+    while(1){
         PutChar(cTestData);
+        PutChar(" ");
         delay();
     }
     return 0;
