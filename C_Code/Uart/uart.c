@@ -60,3 +60,7 @@ void PutChar(int c){
     UART1->UTXD = (unsigned char)c;
 }
 
+unsigned char GetChar(void){
+	while(!(UART1->USR2 & (1<<0)));
+	return (unsigned char)UART1->UXRD;
+}
