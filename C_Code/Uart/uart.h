@@ -7,7 +7,7 @@
 
 /*根据IMX6uLL芯片手册定义UART的结构体*/
 typedef struct {
-    volatile unsigned int UXRD;
+    volatile unsigned int URXD;
              unsigned char RESERVED_0[60];
     volatile unsigned int UTXD;
              unsigned char RESERVED_1[60];

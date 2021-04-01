@@ -62,5 +62,5 @@ void PutChar(int c){
 
 unsigned char GetChar(void){
 	while(!(UART1->USR2 & (1<<0)));
-	return (unsigned char)UART1->UXRD;
+	return (unsigned char)UART1->URXD;
 }
