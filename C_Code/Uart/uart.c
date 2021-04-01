@@ -67,7 +67,7 @@ unsigned char GetChar(void){
 
 void PutStr(const char *s){
 	while(*s){
-		PutStr(*s);
+		PutChar(*s);
 		s++;
 	}
 }

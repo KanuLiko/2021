@@ -147,7 +147,7 @@ Disassembly of section .text:
 8010017c:	687b      	ldr	r3, [r7, #4]
 8010017e:	781b      	ldrb	r3, [r3, #0]
 80100180:	4618      	mov	r0, r3
-80100182:	f7ff fff6 	bl	80100172 <PutStr>
+80100182:	f7ff ffc6 	bl	80100112 <PutChar>
 80100186:	687b      	ldr	r3, [r7, #4]
 80100188:	3301      	adds	r3, #1
 8010018a:	607b      	str	r3, [r7, #4]
@@ -293,10 +293,10 @@ Disassembly of section .debug_line:
   d0:	00632e6e 	rsbeq	r2, r3, lr, ror #28
   d4:	00000000 	andeq	r0, r0, r0
   d8:	9c020500 	cfstr32ls	mvfx0, [r2], {-0}
-  dc:	13801001 	orrne	r1, r0, #1
-  e0:	4b682f3e 	blmi	1a0bde0 <_start-0x7e6f4220>
-  e4:	3d3d3d3d 	ldccc	13, cr3, [sp, #-244]!	; 0xffffff0c
-  e8:	024a7a03 	subeq	r7, sl, #12288	; 0x3000
+  dc:	14801001 	strne	r1, [r0], #1
+  e0:	4c6a3040 	stclmi	0, cr3, [sl], #-256	; 0xffffff00
+  e4:	3e3e3e3e 	mrccc	14, 1, r3, cr14, cr14, {1}
+  e8:	024a7603 	subeq	r7, sl, #3145728	; 0x300000
   ec:	01010001 	tsteq	r1, r1
 
 Disassembly of section .debug_info:
@@ -446,7 +446,7 @@ Disassembly of section .debug_info:
  234:	003c0601 	eorseq	r0, ip, r1, lsl #12
  238:	00d68010 	sbcseq	r8, r6, r0, lsl r0
  23c:	9c010000 	stcls	0, cr0, [r1], {-0}
- 240:	00007d00 	andeq	r7, r0, r0, lsl #26
+ 240:	00006600 	andeq	r6, r0, r0, lsl #12
  244:	23000400 	movwcs	r0, #1024	; 0x400
  248:	04000001 	streq	r0, [r0], #-1
  24c:	00001201 	andeq	r1, r0, r1, lsl #4
@@ -462,23 +462,18 @@ Disassembly of section .debug_info:
  274:	d7080102 	strle	r0, [r8, -r2, lsl #2]
  278:	03000000 	movweq	r0, #0
  27c:	000001a9 	andeq	r0, r0, r9, lsr #3
- 280:	00790201 	rsbseq	r0, r9, r1, lsl #4
+ 280:	00620301 	rsbeq	r0, r2, r1, lsl #6
  284:	019c0000 	orrseq	r0, ip, r0
  288:	00408010 	subeq	r8, r0, r0, lsl r0
  28c:	9c010000 	stcls	0, cr0, [r1], {-0}
- 290:	00000079 	andeq	r0, r0, r9, ror r0
+ 290:	00000062 	andeq	r0, r0, r2, rrx
  294:	00019f04 	andeq	r9, r1, r4, lsl #30
- 298:	33030100 	movwcc	r0, #12544	; 0x3100
+ 298:	33050100 	movwcc	r0, #20736	; 0x5100
  29c:	02000000 	andeq	r0, r0, #0
- 2a0:	b2057791 	andlt	r7, r5, #38010880	; 0x2440000
- 2a4:	28801001 	stmcs	r0, {r0, ip}
- 2a8:	06000000 	streq	r0, [r0], -r0
- 2ac:	00000091 	muleq	r0, r1, r0
- 2b0:	00790701 	rsbseq	r0, r9, r1, lsl #14
- 2b4:	00070000 	andeq	r0, r7, r0
- 2b8:	04080000 	streq	r0, [r8], #-0
- 2bc:	746e6905 	strbtvc	r6, [lr], #-2309	; 0xfffff6fb
-	...
+ 2a0:	05007791 	streq	r7, [r0, #-1937]	; 0xfffff86f
+ 2a4:	6e690504 	cdpvs	5, 6, cr0, cr9, cr4, {0}
+ 2a8:	Address 0x00000000000002a8 is out of bounds.
+
 
 Disassembly of section .debug_abbrev:
 
@@ -573,17 +568,9 @@ Disassembly of section .debug_abbrev:
  15c:	0e030034 	mcreq	0, 0, r0, cr3, cr4, {1}
  160:	0b3b0b3a 	bleq	ec2e50 <_start-0x7f23d1b0>
  164:	18021349 	stmdane	r2, {r0, r3, r6, r8, r9, ip}
- 168:	0b050000 	bleq	140170 <_start-0x7ffbfe90>
- 16c:	12011101 	andne	r1, r1, #1073741824	; 0x40000000
- 170:	06000006 	streq	r0, [r0], -r6
- 174:	193f012e 	ldmdbne	pc!, {r1, r2, r3, r5, r8}	; <UNPREDICTABLE>
- 178:	0b3a0e03 	bleq	e8398c <_start-0x7f27c674>
- 17c:	13490b3b 	movtne	r0, #39739	; 0x9b3b
- 180:	0000193c 	andeq	r1, r0, ip, lsr r9
- 184:	00001807 	andeq	r1, r0, r7, lsl #16
- 188:	00240800 	eoreq	r0, r4, r0, lsl #16
- 18c:	0b3e0b0b 	bleq	f82dc0 <_start-0x7f17d240>
- 190:	00000803 	andeq	r0, r0, r3, lsl #16
+ 168:	24050000 	strcs	r0, [r5], #-0
+ 16c:	3e0b0b00 	vmlacc.f64	d0, d11, d0
+ 170:	0008030b 	andeq	r0, r8, fp, lsl #6
 	...
 
 Disassembly of section .debug_aranges:
