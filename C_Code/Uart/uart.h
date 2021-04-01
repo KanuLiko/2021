@@ -30,6 +30,4 @@ typedef struct {
 
 void Uart_Init(void);
 void PutChar(int c);
-unsigned char GetChar(void);
-
 #endif
