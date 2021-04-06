@@ -8,9 +8,9 @@ int main(int argc, char* argv[]){
     dlist_init(&dlist);
 
     printf("\r\n insert 1,2,3");
-    dlist_insert_head(&dlist,NULL,1);
-    dlist_insert_head(&dlist,NULL,2);
-    dlist_insert_head(&dlist,NULL,3);
+    dlist_insert_head(&dlist,pNode,1);
+    dlist_insert_head(&dlist,pNode,2);
+    dlist_insert_head(&dlist,pNode,3);
     printf("\n**********************");
     dlist_dump(&dlist);
     

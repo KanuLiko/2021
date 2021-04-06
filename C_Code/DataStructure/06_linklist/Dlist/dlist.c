@@ -24,20 +24,22 @@ void dlist_destroy(stDlistHead *dlist){
 }
 
 int dlist_insert_head(stDlistHead *dlist, stDlistNode *pNode, int data){
-    if(pNode == NULL){
+    if(pNode == NULL){ //只传递一个数据时
         pNode = (stDlistNode*)malloc(sizeof(stDlistNode));
         if(pNode == NULL){
             return -1;
         }
     }
+
     pNode->data = data;
     pNode->prev = NULL;
     pNode->next = NULL;
+
     if(dlist->size == 0){ //链表是空链表的情形
         dlist->head = pNode;
         dlist->tail = pNode;
     }else{//链表是非空的情形
-        pNode->next = dlist->head->prev;
+        pNode->next = dlist->head;
         dlist->head->prev = pNode;
         dlist->head = pNode;
     }
