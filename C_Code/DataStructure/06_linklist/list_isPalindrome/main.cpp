@@ -1,5 +1,6 @@
 #include"LinkList.h"
 //利用链表判断是否时回文的数组
+
 char array1[] = {'a','b','c','d','a'};
 bool isPalindrome(LinkList* list,int length);
 int main(int argc,char *argv[]){
